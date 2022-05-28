@@ -1,4 +1,4 @@
-module github.com/JeffAshton/terraform-provider-jsonschema
+module github.com/bpedman/terraform-provider-jsonschema
 
 go 1.15
 

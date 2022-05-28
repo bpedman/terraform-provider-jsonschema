@@ -5,7 +5,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/JeffAshton/terraform-provider-jsonschema/internal/provider"
+	"github.com/bpedman/terraform-provider-jsonschema/internal/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )
 
