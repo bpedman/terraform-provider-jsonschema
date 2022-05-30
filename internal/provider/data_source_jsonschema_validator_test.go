@@ -3,6 +3,7 @@ package provider
 import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"os"
 	"testing"
 )
 
@@ -24,7 +25,7 @@ func Test_dataSourceJsonschemaValidatorRead(t *testing.T) {
 				ProviderFactories: providerFactories,
 				Steps: []resource.TestStep{
 					{
-						Config: makeDataSource(tt.document, tt.schema),
+						Config: makeDataSource(t, tt.document, tt.schema),
 						Check: resource.ComposeAggregateTestCheckFunc(
 							resource.TestCheckResourceAttr("data.jsonschema_validator.test", "validated", fmt.Sprintf("%s\n", tt.document)),
 						),
@@ -46,17 +47,22 @@ func Test_dataSourceJsonschemaValidatorRead(t *testing.T) {
 	}
 }
 
-func makeDataSource(document string, schema string) string {
+func makeDataSource(t *testing.T, document string, schema string) string {
+	tempDir := t.TempDir()
+	schemaFile := fmt.Sprintf("%s/schema.json", tempDir)
+	err := os.WriteFile(schemaFile, []byte(schema), 0644)
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	return fmt.Sprintf(`
 data "jsonschema_validator" "test" {
   document = <<EOF
 %s
 EOF
-  schema   = <<EOF
-%s
-EOF
+  schema   = "%s"
 }
-`, document, schema)
+`, document, schemaFile)
 }
 
 var schemaValid = `{
