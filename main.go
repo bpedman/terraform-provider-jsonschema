@@ -18,8 +18,7 @@ func main() {
 	opts := &plugin.ServeOpts{ProviderFunc: provider.Provider}
 
 	if debugMode {
-		// TODO: update this string with the full name of your provider as used in your configs
-		err := plugin.Debug(context.Background(), "registry.terraform.io/hashicorp/scaffolding", opts)
+		err := plugin.Debug(context.Background(), "registry.terraform.io/bpedman/jsonschema", opts)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
