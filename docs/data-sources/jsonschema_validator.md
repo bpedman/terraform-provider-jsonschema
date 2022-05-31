@@ -7,7 +7,7 @@ The `jsonschema_validator` data source validates a json document using [json-sch
 ```hcl-terraform
 data "jsonschema_validator" "values" {
   document = file("/path/to/document.json")
-  schema = file("/path/to/schema.json")
+  schema = "/path/to/schema.json"
 }
 ```
 
@@ -16,7 +16,7 @@ data "jsonschema_validator" "values" {
 List arguments this data source takes:
 
 * `document` &mdash; (Required) Content of a json document.
-* `schema` &mdash; (Required) Content of a [json-schema](https://json-schema.org/) file.
+* `schema` &mdash; (Required) File path or file URL to a [json-schema](https://json-schema.org/) document.
 
 ## Attributes Reference
 

@@ -23,7 +23,7 @@ On |terraform|_ versions 0.13+ use:
     required_providers {
       jsonschema = {
         source = "bpedman/jsonschema"
-        version = "0.1.0"
+        version = "0.2.1"
       }
     }
   }
@@ -42,7 +42,7 @@ Example:
   #: Validate values file
   data "jsonschema_validator" "values" {
     document = file("/path/to/document.json")
-    schema = file("/path/to/schema.json")
+    schema = "/path/to/schema.json"
   }
 
   #: Install a helm release with the validated json
@@ -58,7 +58,7 @@ Development
 This repository follows structure of |terraform-provider-scaffolding|_ template
 recommended by |terraform|_ developers (see |terraform-publishing-provider|_).
 
-For publishing it uses Gitlab Actions.
+For publishing it uses GitHub Actions. Push a new tag and a new version is built and released.
 
 Environment requirements:
 
